@@ -8,7 +8,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nombre = $_POST['nombre'];
         $stmt = $conexion->prepare("INSERT INTO marca (nombre) VALUES (:nombre)");
         $stmt->bindParam(':nombre', $nombre);
-        $stmt->execute();
+
+        try {
+            $stmt = $conexion->prepare("INSERT INTO marca (nombre) VALUES (:nombre)");
+            $stmt->bindParam(':nombre', $nombre);
+
+            if ($stmt->execute()) {
+                echo "<script>
+                    Swal.fire({
+                        title: '¡Éxito!',
+                        text: 'Marca agregada correctamente',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    });
+                </script>";
+            }
+        } catch (PDOException $e) {
+            echo "<script>
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al agregar la marca: " . $e->getMessage() . "',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
+            </script>";
+        }
+
+
+        
     } elseif (isset($_POST['eliminar_id'])) {
         // Eliminación de una marca
         $id = $_POST['eliminar_id'];

@@ -16,8 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':cliente_id', $cliente_id);
         $stmt->bindParam(':fecha', $fecha);
         $stmt->bindParam(':total', $total);
-        $stmt->execute();
 
+        if ($stmt->execute()) {
+            echo "<script>
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: 'Pedido agregado correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                });
+            </script>";
+        }   
+        
         // Obtener el ID del pedido insertado
         $pedido_id = $conexion->lastInsertId();
 
@@ -48,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Consulta para obtener los pedidos
             $consulta = $conexion->query("SELECT p.id, c.nombre || ' ' || c.apellido AS cliente, p.fecha, p.total FROM pedido p INNER JOIN cliente c ON p.cliente_id = c.id");
             ?>
-
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-md-12">

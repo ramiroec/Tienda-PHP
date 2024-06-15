@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Inserción de nuevo usuario
         $nombre_usuario = $_POST['nombre_usuario'];
         $contrasena = $_POST['contrasena'];
-        //$contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT); // Encriptar la contraseña
+        //$contrasena = password_hash($_POST['contrasena'], PASSWORD_DEFAULT); // Encriptar
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
         $rol = $_POST['rol'];
@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <tr>
                         <th>ID</th>
                         <th>Nombre de Usuario</th>
+                        <th>Contraseña</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Rol</th>
@@ -54,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         echo '<tr>';
                         echo '<td>' . $usuario['id'] . '</td>';
                         echo '<td>' . $usuario['nombre_usuario'] . '</td>';
+                        echo '<td>' . $usuario['contrasena'] . '</td>';
                         echo '<td>' . $usuario['nombre'] . '</td>';
                         echo '<td>' . $usuario['apellido'] . '</td>';
                         echo '<td>' . $usuario['rol'] . '</td>';

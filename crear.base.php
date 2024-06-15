@@ -11,13 +11,13 @@ try {
     $db->exec("
         CREATE TABLE IF NOT EXISTS marca (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL
+            nombre TEXT NOT NULL UNIQUE
         );
 
         CREATE TABLE IF NOT EXISTS producto (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT NOT NULL,
-            precio REAL NOT NULL,
+            precio INT NOT NULL,
             foto TEXT NOT NULL,
             disponibilidad INTEGER NOT NULL CHECK (disponibilidad IN (0, 1)),            id_marca INTEGER,
             FOREIGN KEY (id_marca) REFERENCES marca(id)
@@ -78,7 +78,10 @@ try {
 
     $stmt->execute();
 
-    echo "Base de datos y tablas creadas exitosamente. Usuario insertado.";
+    echo "Base de datos y tablas creadas exitosamente.";
+    echo "\n";
+    echo "Usuario insertado.";
+    echo "\n";
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }

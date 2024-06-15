@@ -6,7 +6,7 @@ include 'menu.php';
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-success text-center">
-                <h4>Bienvenido, <?= htmlspecialchars($_SESSION['usuario']) ?></h4>
+                <h4>Bienvenido, <?php print $_SESSION['usuario'] ?></h4>
             </div>
         </div>
     </div>
@@ -35,3 +35,5 @@ include 'menu.php';
 </div>
 </body>
 </html>
+
+
